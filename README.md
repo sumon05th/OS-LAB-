@@ -1,5 +1,5 @@
-#OS-LAB- 5th Sem
-                                                 ##Aims
+# OS-LAB- 5th Sem
+                                                 ## Aims \
 1.To create a new child process using fork system call, get exec ids and verify the number of processes for any given number of system calls.\
 2.To block a parent process until child completes using wait system call. \
 3.To load an executable program in a child processes exec system call. \
