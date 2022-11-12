@@ -1,0 +1,66 @@
+# To generate 25 fibonacci numbers and determine prime amongst them using pipe.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main()
+
+{
+pid_t pid; int
+pfd[2];
+int n,m,i,j,flg,f1,f2,f3;
+printf("Enter the no. of terms of fibonacci series: ");
+scanf("%d",&n);
+static unsigned int ar[100],br[100];
+if(pipe(pfd) == -1)
+{
+printf("Error in pipe"); exit(-
+1);
+}
+pid=fork(); if
+(pid == 0)
+{
+printf("Child process generates Fibonacci series\n" ); f1 = -1;
+f2 = 1;
+for(i = 0;i < n; i++)
+{
+f3 = f1 + f2;
+printf("%d\t",f3); f1 =
+f2;
+f2 = f3; ar[i] =
+f3;
+}
+write(pfd[1],ar,100*sizeof(int));
+}
+else if (pid > 0)
+{
+wait(NULL);
+read(pfd[0], br, 100*sizeof(int));
+printf("\nenter no. of terms of prime numbers from fibanocci series: ");
+scanf("%d",&m);
+printf("\nParent prints Fibonacci that are Prime\n");
+for(i = 0;i < m; i++)
+{
+flg = 0;
+if (br[i] <= 1) flg =
+1;
+for(j=2; j<=br[i]/2; j++)
+{
+if (br[i]%j == 0)
+{
+flg=1;
+break;
+}
+}
+if (flg == 0) printf("%d\t",
+br[i]);
+}
+printf("\n");
+}
+else
+{
+printf("Process creation failed"); exit(-1);
+}
+}
