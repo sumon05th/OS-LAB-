@@ -1,0 +1,31 @@
+#To block a parent process until child completes using wait system call. 
+
+
+#include<unistd.h>
+#include<sys/types.h>
+#include<stdio.h>
+#include<sys/wait.h>
+int main()
+{
+pid_t p;
+
+p=fork();
+if(p<0) return 0;
+if(p==0)
+{
+
+printf("Child Process: \n");
+printf("Odd numbers from 1 to 10\n");
+for(int i =1;i<=20;i+=2)
+    printf("%d\n",i);
+}
+else
+{
+wait(NULL);
+printf("Parent Process: \n");
+printf("Even numbers from 1 to 10\n");
+for(int i =2;i<=10;i+=2)
+    printf("%d\n",i);
+}
+
+}
