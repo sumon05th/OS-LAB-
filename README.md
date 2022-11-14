@@ -7,7 +7,8 @@
 5.To display directory contents using readdir system call.\
 6.To generate 25 fibonacci numbers and determine prime amongst them using pipe.\
 7.To determine number of users logged in using pipe.\
-8.To exchange message between server and client using message queue.
+8.To exchange message between server and client using message queue.\
+9.To synchronize producer and consumer processes using semaphore.
 
 
 
