@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
 
 
-# hello.txt  file
+# hello.c  file
 
 #include <stdio.h>
 #include <unistd.h>
