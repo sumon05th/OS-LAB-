@@ -1,0 +1,51 @@
+#This code is the implimentation of fcfs
+
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+//This code is the implimentation of fcfs
+
+int main()
+{
+    int n=3;
+    int bt[n]={24,3,4};
+    int at[n]={0,0,0};
+    int ct[n],tat[n],wt[n],totaltat=0,totalwt=0;
+    vector<vector<int>> q(n,vector<int>(2));
+    for(int i=0;i<n;i++){
+        q[i][0]=at[i];
+        q[i][1]=i;
+    }
+    sort(q.begin(),q.end());
+    
+    int t=0,i=0;
+    while(i<n){
+        if(t<q[i][0]){
+            t++;
+            continue;
+        }
+        int p=q[i][1];
+        ct[p]=t+bt[p];
+        i++;
+        t+=bt[p];
+    }
+    for(int i=0;i<n;i++){
+        tat[i]=ct[i]-at[i];
+        wt[i]=tat[i]-bt[i];
+        totalwt+=wt[i];
+        totaltat+=tat[i];
+    }
+    cout<<"ct"<<" "<<"tat"<<" "<<"wt"<<"\n";
+    for(int i=0;i<n;i++){
+        cout<<ct[i]<<" "<<tat[i]<<" "<<wt[i]<<"\n";
+    }
+    double avgtat=double(totaltat)/double(n);
+    double avgwt=double(totalwt)/double(n);
+    cout<<"average TAT for this processes is: "<<avgtat<<"\n";
+    cout<<"average WT for this processes is: "<<avgwt<<"\n";
+
+    return 0;
+}
