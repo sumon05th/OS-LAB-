@@ -1,0 +1,65 @@
+#SJF
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n=5;
+    int bt[n]={6,2,8,3,4};
+    int at[n]={2,5,1,0,4};
+    int ct[n],tat[n],wt[n],totaltat=0,totalwt=0;
+    vector<vector<int>> arr;
+    vector<vector<int>> q(n,vector<int>(2));
+    for(int i=0;i<n;i++){
+        q[i][0]=at[i];
+        q[i][1]=i;
+    }
+    sort(q.begin(),q.end());
+
+    for(int i=0;i<n;i++){
+        cout<<q[i][0]<<" "<<q[i][1]<<"\n";
+    }
+    
+    
+    int qi=0;
+    while(qi<n&&q[qi][0]==0){
+        arr.push_back({bt[q[qi][1]],q[qi][1]});
+        qi++;
+    }
+    sort(arr.begin(),arr.end());
+    int t=0,i=0;
+    while(i<n){
+        int p=arr[0][1];
+        ct[p]=t+bt[p];
+        i++;
+        t+=bt[p];
+        arr.erase(arr.begin());
+        while(qi<n&&q[qi][0]<=t){
+            arr.push_back({bt[q[qi][1]],q[qi][1]});
+            qi++;
+        }
+        sort(arr.begin(),arr.end());
+        // for(int j=0;j<arr.size();j++){
+        //     cout<<arr[j]+1<<" ";
+        // }
+        cout<<"\n";
+    }
+    for(int i=0;i<n;i++){
+        tat[i]=ct[i]-at[i];
+        wt[i]=tat[i]-bt[i];
+        totalwt+=wt[i];
+        totaltat+=tat[i];
+    }
+    cout<<"ct"<<" "<<"tat"<<" "<<"wt"<<"\n";
+    for(int i=0;i<n;i++){
+        cout<<ct[i]<<" "<<tat[i]<<" "<<wt[i]<<"\n";
+    }
+    double avgtat=double(totaltat)/double(n);
+    double avgwt=double(totalwt)/double(n);
+    cout<<"average TAT for this processes is: "<<avgtat<<"\n";
+    cout<<"average WT for this processes is: "<<avgwt<<"\n";
+
+    return 0;
+}
