@@ -84,3 +84,42 @@ stat("stat.c", &sfile);
 printf("st_mode = %o", sfile.st_mode);
 return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+or we can use this
+
+
+#include <stdio.h>
+#include <sys/stat.h>
+#include <time.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]) {
+  struct stat sfile;
+  if (argv[argc - 1]) {
+    if (stat(argv[argc - 1], &sfile) != -1) {
+      printf("uid:%d \ngid:%d \nsize:%ld\n", sfile.st_uid, sfile.st_gid, sfile.st_size);
+      printf("a-time: %sm-time: %s\n", ctime(&sfile.st_atime), ctime(&sfile.st_mtime));
+      if (sfile.st_mode == S_IRUSR) {
+        printf("YES - User read permission");
+      } else {
+        printf("NO - User read permission");
+      }
+    }
+  }
+}
